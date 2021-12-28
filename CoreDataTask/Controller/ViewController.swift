@@ -48,12 +48,9 @@ class ViewController: UIViewController,dataPass {
         alert(parentTag: sender.tag)
     }
     
-    @IBAction func deleteBtnTap(_ sender:UIButton){
-        
-        
-        
-    }
     
+    
+    //MARK:-DROPDOWN FOR DEPARTMENT
     
     func selectDepartmentDropDown(){
         
@@ -79,67 +76,6 @@ class ViewController: UIViewController,dataPass {
                 dropDown.hide()
         }
     }
-    
-    
-    func alert(parentTag:Int){
-        
-        let alert = UIAlertController(title: "Add New Employee Email", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add", style: .default) { (action) in
-            
-            if self.newEmail.isValidEmail(self.newEmail.text ?? "") == true {
-                
-                if parentTag == 0 {
-                    if self.departmentObjArr.contains(where: {$0.email == self.newEmail.text ?? ""}) {
-                        self.showToast(message: "Email already exist in \(self.departmentArr[parentTag].title ?? "")")
-                    }else {
-                        let departmentObject = DepartmentObjects(context: self.context)
-                        departmentObject.email = self.newEmail.text ?? ""
-                        departmentObject.done = false
-                        departmentObject.parentCategory = self.departmentArr[parentTag]
-                        self.departmentObjArr.append(departmentObject)
-                        self.saveItems(val: 0)
-                          }
-                }else if parentTag == 1{
-                    if self.departmentObjArr1.contains(where: {$0.email == self.newEmail.text ?? ""}) {
-                        self.showToast(message: "Email already exist in \(self.departmentArr[parentTag].title ?? "")")
-                    }else {
-                        let departmentObject = DepartmentObjects(context: self.context)
-                        departmentObject.email = self.newEmail.text ?? ""
-                        departmentObject.done = false
-                        departmentObject.parentCategory = self.departmentArr[parentTag]
-                        self.departmentObjArr1.append(departmentObject)
-                        self.saveItems(val: 0)
-                          }
-                }else {
-                    if self.departmentObjArr2.contains(where: {$0.email == self.newEmail.text ?? ""}) {
-                        self.showToast(message: "Email already exist in \(self.departmentArr[parentTag].title ?? "")")
-                    }else {
-                        let departmentObject = DepartmentObjects(context: self.context)
-                        departmentObject.email = self.newEmail.text ?? ""
-                        departmentObject.done = false
-                        departmentObject.parentCategory = self.departmentArr[parentTag]
-                        self.departmentObjArr2.append(departmentObject)
-                        self.saveItems(val: 0)
-                          }
-                }
-                
-                
-            }else {
-                self.showToast(message: "Invalid Email")
-            }
-        }
-    
-        alert.addTextField { (alertTF) in
-            
-            alertTF.placeholder = "Enter Employee Email"
-            self.newEmail = alertTF
-        }
-        
-        alert.addAction(action)
-        self.present(alert, animated: true, completion: nil)
-    
-    }
-
     
 }
 //MARK:- TABLEVIEW DELEGATE METHODS
@@ -240,7 +176,7 @@ extension ViewController:UITableViewDataSource,UITableViewDelegate {
 }
 
 
-//EMAIL AND SWITCH FUNCIONS
+//MARK:- EMAIL AND SWITCH AND ALERT FUNCTION
 
 extension ViewController {
     
@@ -330,7 +266,69 @@ extension ViewController {
         
         saveItems(val: 0)
         
+    }
+    
+    
+    //ALERT METHOD
+    
+    
+    func alert(parentTag:Int){
         
+        let alert = UIAlertController(title: "Add New Employee Email", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add", style: .default) { (action) in
+            
+            if self.newEmail.isValidEmail(self.newEmail.text ?? "") == true {
+                
+                if parentTag == 0 {
+                    if self.departmentObjArr.contains(where: {$0.email == self.newEmail.text ?? ""}) {
+                        self.showToast(message: "Email already exist in \(self.departmentArr[parentTag].title ?? "")")
+                    }else {
+                        let departmentObject = DepartmentObjects(context: self.context)
+                        departmentObject.email = self.newEmail.text ?? ""
+                        departmentObject.done = false
+                        departmentObject.parentCategory = self.departmentArr[parentTag]
+                        self.departmentObjArr.append(departmentObject)
+                        self.saveItems(val: 0)
+                          }
+                }else if parentTag == 1{
+                    if self.departmentObjArr1.contains(where: {$0.email == self.newEmail.text ?? ""}) {
+                        self.showToast(message: "Email already exist in \(self.departmentArr[parentTag].title ?? "")")
+                    }else {
+                        let departmentObject = DepartmentObjects(context: self.context)
+                        departmentObject.email = self.newEmail.text ?? ""
+                        departmentObject.done = false
+                        departmentObject.parentCategory = self.departmentArr[parentTag]
+                        self.departmentObjArr1.append(departmentObject)
+                        self.saveItems(val: 0)
+                          }
+                }else {
+                    if self.departmentObjArr2.contains(where: {$0.email == self.newEmail.text ?? ""}) {
+                        self.showToast(message: "Email already exist in \(self.departmentArr[parentTag].title ?? "")")
+                    }else {
+                        let departmentObject = DepartmentObjects(context: self.context)
+                        departmentObject.email = self.newEmail.text ?? ""
+                        departmentObject.done = false
+                        departmentObject.parentCategory = self.departmentArr[parentTag]
+                        self.departmentObjArr2.append(departmentObject)
+                        self.saveItems(val: 0)
+                          }
+                }
+                
+                
+            }else {
+                self.showToast(message: "Invalid Email")
+            }
+        }
+    
+        alert.addTextField { (alertTF) in
+            
+            alertTF.placeholder = "Enter Employee Email"
+            self.newEmail = alertTF
+        }
+        
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    
     }
     
 }

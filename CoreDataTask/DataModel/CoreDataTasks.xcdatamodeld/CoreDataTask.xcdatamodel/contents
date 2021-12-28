@@ -3,8 +3,15 @@
     <entity name="Department" representedClassName=".Department" syncable="YES" codeGenerationType="class">
         <attribute name="done" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
+        <relationship name="deptObjects" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DepartmentObjects" inverseName="parentCategory" inverseEntity="DepartmentObjects"/>
+    </entity>
+    <entity name="DepartmentObjects" representedClassName=".DepartmentObjects" syncable="YES" codeGenerationType="class">
+        <attribute name="done" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Department" inverseName="deptObjects" inverseEntity="Department"/>
     </entity>
     <elements>
-        <element name="Department" positionX="-63" positionY="-18" width="128" height="73"/>
+        <element name="Department" positionX="787.1796875" positionY="4958.03515625" width="128" height="88"/>
+        <element name="DepartmentObjects" positionX="949.86328125" positionY="4993.15234375" width="128" height="88"/>
     </elements>
 </model>
